@@ -13,8 +13,20 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { aspectRatioOptions, creditFee, defaultValues, transformationTypes } from "@/constants"
+import { CustomField } from "./CustomField"
+import { useEffect, useState, useTransition } from "react"
+import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils"
+import MediaUploader from "./MediaUploader"
+import TransformedImage from "./TransformedImage"
+import { updateCredits } from "@/lib/actions/user.actions"
+import { getCldImageUrl } from "next-cloudinary"
+import { addImage, updateImage } from "@/lib/actions/image.actions"
+import { useRouter } from "next/navigation"
+import { InsufficientCreditsModal } from "./InsufficientCreditsModal"
+ 
 
-const formSchema = z.object({
+export const formSchema = z.object({
   title: z.string(),
   aspectRatio: z.string().optional(),
   color: z.string().optional(),
@@ -50,22 +62,13 @@ const Transformationform = ({action, data = null}: TransformationFormProps) => {
   return (
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-      <FormField
-        control={form.control}
-        name="username"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Username</FormLabel>
-            <FormControl>
-              <Input placeholder="shadcn" {...field} />
-            </FormControl>
-            <FormDescription>
-              This is your public display name.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+     <CustomField
+     control={form.control}
+     name= "title"
+     formLabel="Image Title"
+     className="w-full"
+     render= {({ field }) => <Input{...field} />}
+     />
       <Button type="submit">Submit</Button>
     </form>
   </Form>

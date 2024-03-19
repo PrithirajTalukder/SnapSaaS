@@ -136,7 +136,7 @@ const Transformationform = ({action, data = null, userId, type, creditBalance, c
         setNewTransformation(null)
     
         startTransition(async () => {
-          //await updateCredits(userId, creditFee)
+          await updateCredits(userId, -1)
         })
       }
 
@@ -253,6 +253,18 @@ const Transformationform = ({action, data = null, userId, type, creditBalance, c
         />
         )}
       />
+
+
+      <TransformedImage
+      image={image}
+      type={type}
+      title={form.getValues().title}
+      isTransforming={isTransforming}
+      setisTransforming={setisTransforming}
+      transformationConfig={transformationConfig}
+      />
+       
+
 
      </div>
 

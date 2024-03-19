@@ -134,5 +134,5 @@ declare type CreateUserParams = {
     transformationConfig: Transformations | null;
     isTransforming: boolean;
     hasDownload?: boolean;
-    setIsTransforming?: React.Dispatch<React.SetStateAction<boolean>>;
+    setisTransforming?: React.Dispatch<React.SetStateAction<boolean>>;
   };
